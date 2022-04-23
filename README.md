@@ -2,52 +2,87 @@
 An app using React, GraphQL and node.js.
 
 ## How to run server
-Run the command: `npm run client`
+Run client only: `npm run client`
+Run client + server: `npm run server`
 
-## References
-- Book: Full-Stack Web Development with GraphQL and React - Second Edition, by Sebastian Grebe
-
-## Install modules
-React and react-dom
+## Install dependencies
+### React and react-dom
 ```
 npm install --save react react-dom
 ```
 
-Webpack - module boundler
+### Webpack
+Module boundler
 ```
 npm install --save-dev @babel/core babel-loader @babel/preset-env @babel/preset-react clean-webpack-plugin css-loader file-loader html-webpack-plugin style-loader url-loader webpack webpack-cli webpack-dev-server
 ```
 
-React Helmet - for overriding multiple headers and server-side rendering
+### React Helmet
+For overriding multiple headers and server-side rendering
 ```
 npm install --save react-helmet
 ```
 
-MiniCss - bundle css files
+### MiniCss
+To bundle css files
 ```
 npm install --save-dev mini-css-extract-plugin
 ```
 
-React Developer Tools - Chrome Extension
+### Chrome Extension
+Search in chrome web store: React Developer Tools
 
-Expess - web server
+### Express
+Web server
 ```
 npm install --save express
 ```
 
-Nodemon - restart server when source changes
+### Nodemon
+Restart server when source changes
 ```
 npm install --save nodemon
 ```
 
-Babel
+### Babel
 ```
 npm install --save-dev @babel/node
 ```
 
+### Middlewares
 compression - compress and save user bandwidth
 cors - Middleware for cross origin source sharing
 helmet - allow to set HTTP headers for security
 ```
 npm install --save compression cors helmet
 ```
+
+### winston
+Dependency for logging
+```
+npm install --save winston
+```
+
+### Sequelize
+Sequelize is an ORM for Node.js. It supports the PostgreSQL, MySQL, SQLite, and MSSQL standards.
+```
+npm install --save pg pg-hstore
+```
+
+## Graphql queries
+### Query posts
+```
+curl --location --request POST 'http://localhost:8000/graphql' \
+--header 'Content-Type: application/json' \
+--data-raw '{"query":"{\n    posts {\n        id\n        text\n        user {\n            avatar\n            username\n        }\n\n    }\n}","variables":{}}'
+```
+
+#### Mutation - add post
+```
+curl --location --request POST 'http://localhost:8000/graphql' \
+--header 'Content-Type: application/json' \
+--data-raw '{"query":"mutation addPost($post : PostInput!, $user: UserInput!) {\n    addPost(post : $post, user: $user) {\n      id\n      text\n      user {\n        username\n        avatar\n      }\n    }\n  }\n  ","variables":{"post":{"text":"You just added a post."},"user":{"avatar":"/uploads/avatar3.png","username":"Fake User"}}}'
+```
+
+## References
+- Book: Full-Stack Web Development with GraphQL and React - Second Edition, by Sebastian Grebe
