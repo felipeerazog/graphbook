@@ -66,7 +66,19 @@ npm install --save winston
 ### Sequelize
 Sequelize is an ORM for Node.js. It supports the PostgreSQL, MySQL, SQLite, and MSSQL standards.
 ```
+npm install --save sequelize
 npm install --save pg pg-hstore
+```
+
+### sequelize-cli
+To generate db models.
+```
+npm install -g sequelize-cli
+```
+
+### Babel hook
+```
+npm install --save-dev babel-plugin-require-context-hook
 ```
 
 ## Graphql queries
@@ -82,6 +94,41 @@ curl --location --request POST 'http://localhost:8000/graphql' \
 curl --location --request POST 'http://localhost:8000/graphql' \
 --header 'Content-Type: application/json' \
 --data-raw '{"query":"mutation addPost($post : PostInput!, $user: UserInput!) {\n    addPost(post : $post, user: $user) {\n      id\n      text\n      user {\n        username\n        avatar\n      }\n    }\n  }\n  ","variables":{"post":{"text":"You just added a post."},"user":{"avatar":"/uploads/avatar3.png","username":"Fake User"}}}'
+```
+
+## sequelize commands
+### Generate models
+```
+sequelize model:generate --models-path src/server/models --migrations-path src/server/migrations --name Post --attributes text:text
+```
+### Create models in database:
+```
+sequelize db:migrate --migrations-path src/server/migrations --config src/server/config/index.js
+```
+### Create seeds to fill empty database table with fake data
+```
+sequelize seed:generate --name fake-posts --seeders-path src/server/seeders
+```
+### Execute seeds
+```
+sequelize db:seed:all --seeders-path src/server/seeders --config src/server/config/index.js
+```
+
+## Env variables - required
+- `NODE_ENV`: `poduction` or `development`
+
+### Env setup
+open envs file:
+```
+open ~/.bash_profile
+```
+set value:
+```
+export name="value"
+```
+apply changes:
+```
+source ~/.bash_profile
 ```
 
 ## References
