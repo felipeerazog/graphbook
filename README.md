@@ -23,7 +23,7 @@ For overriding multiple headers and server-side rendering
 npm install --save react-helmet
 ```
 
-### MiniCss
+### MiniCss
 To bundle css files
 ```
 npm install --save-dev mini-css-extract-plugin
